@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Film Library</title>
+    <script src="ctrl/Initialize.js"></script>
+    <script src="model/Movie.js"></script>
+    <script src="view/listMovies.js"></script>
+    <script>
+      window.addEventListener("load", fl.view.listMovies.setupUserInterface);
+    </script>
+  </head>
+  <body>
+    <h1>Public Library: List all films</h1>
+    <table id="Films">
+      <thead><tr><th>movieId</th><th>Title</th><th>releaseDate</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <nav><a href="index.html">Back to main menu.</a></nav>
+  </body>
+</html>
