@@ -1,52 +1,63 @@
-/***********************************************
-***  Methods for the use case updateBook  ******
-************************************************/
-pl.view.updateBook = {
-  setupUserInterface: function () {
-    var formEl = document.forms['Book'],
+/**
+ * Version 0.8
+ * Author: htha9587
+ * 12-26-16
+ */
+
+fl.view.updateMovie = 
+{
+  setupUserInterface: function () 
+  {
+    var formEl = document.forms['Movie'],
         saveButton = formEl.commit,
-        selectBookEl = formEl.selectBook;
-    var key="", keys=[], book=null, optionEl=null, i=0;
-    // load all book objects
-    Book.loadAll();
-    // populate the selection list with books
-    keys = Object.keys( Book.instances);
-    for (i=0; i < keys.length; i++) {
+        selectMovieEl = formEl.selectMovie;
+    var key="", keys=[], movie=null, optionEl=null, i=0;
+    //Loads all movie objects.
+    Movie.loadAll();
+    //Populates the selection list with movies.
+    keys = Object.keys( Movie.instances);
+    for (i=0; i < keys.length; i++) 
+    {
       key = keys[i];
-      book = Book.instances[key];
+      movie = Movie.instances[key];
       optionEl = document.createElement("option");
-      optionEl.text = book.title;
-      optionEl.value = book.isbn;
-      selectBookEl.add( optionEl, null);
+      optionEl.text = movie.title;
+      optionEl.value = movie.movieId;
+      selectMovieEl.add( optionEl, null);
     }
-    // when a book is selected, populate the form with the book data
-    selectBookEl.addEventListener("change", function () {
-        var book=null, key = selectBookEl.value;
-        if (key) {
-          book = Book.instances[key];
-          formEl.isbn.value = book.isbn;
-          formEl.title.value = book.title;
-          formEl.year.value = book.year;
-        } else {
-      	  formEl.isbn.value = "";
+    //When a film is selected, populates the form with the movie data.
+    selectMovieEl.addEventListener("change", function ()
+    		{
+        var movie=null, key = selectMovieEl.value;
+        if (key) 
+        {
+          movie = Movie.instances[key];
+          formEl.movieId.value = movie.movieId;
+          formEl.title.value = movie.title;
+          formEl.releaseDate.value = movie.releaseDate;
+        } else 
+        {
+      	  formEl.movieId.value = "";
       	  formEl.title.value = "";
-      	  formEl.year.value = "";
+      	  formEl.releaseDate.value = "";
         }
     });
     saveButton.addEventListener("click", 
-        pl.view.updateBook.handleSaveButtonClickEvent);
-    window.addEventListener("beforeunload", function () {
-        Book.saveAll(); 
+        fl.view.updateMovie.handleSaveButtonClickEvent);
+    window.addEventListener("beforeunload", function () 
+    		{
+        Movie.saveAll(); 
     });
   },
-  // save session data
-  handleSaveButtonClickEvent: function () {
-    var formEl = document.forms['Book'];
-    var slots = { isbn: formEl.isbn.value, 
+  //Saves session data.
+  handleSaveButtonClickEvent: function ()
+  {
+    var formEl = document.forms['Movie'];
+    var slots = { movieId: formEl.movieId.value, 
           title: formEl.title.value, 
-          year: formEl.year.value
+          releaseDate: formEl.releaseDate.value
         };
-    Book.update( slots);
+    Movie.update( slots);
     formEl.reset();
   }
 };
