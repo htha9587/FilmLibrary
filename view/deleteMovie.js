@@ -1,39 +1,44 @@
 /**
- * Version 0.5
+ * Version 0.6
  * Author: htha9587
  * 12-26-16
  */
 
-pl.view.deleteBook = {
-  setupUserInterface: function () {
-    var deleteButton = document.forms['Book'].commit;
-    var selectEl = document.forms['Book'].selectBook;
-    var key="", keys=[], book=null, optionEl=null, i=0;
-    // load all book objects
-    Book.loadAll();
-    keys = Object.keys( Book.instances);
-    // populate the selection list with books
-    for (i=0; i < keys.length; i++) {
+fl.view.deleteMovie = 
+{
+  setupUserInterface: function () 
+  {
+    var deleteButton = document.forms['Movie'].commit;
+    var selectEl = document.forms['Movie'].selectMovie;
+    var key="", keys=[], movie=null, optionEl=null, i=0;
+    //Loads all book objects.
+   Movie.loadAll();
+    keys = Object.keys( Movie.instances);
+    //Populates the selection list with movies.
+    for (i=0; i < keys.length; i++) 
+    {
       key = keys[i];
-      book = Book.instances[key];
+      movie = Movie.instances[key];
       optionEl = document.createElement("option");
-      optionEl.text = book.title;
-      optionEl.value = book.isbn;
+      optionEl.text = movie.title;
+      optionEl.value = movie.movieId;
       selectEl.add( optionEl, null);
     }
     deleteButton.addEventListener("click", 
-        pl.view.deleteBook.handleDeleteButtonClickEvent);
-    window.addEventListener("beforeunload", function () {
-        Book.saveAll(); 
+        fl.view.deleteMovie.handleDeleteButtonClickEvent);
+    window.addEventListener("beforeunload", function ()
+    		{
+       Movie.saveAll(); 
     });
   },
-  // Event handler for deleting a book
-  handleDeleteButtonClickEvent: function () {
-    var selectEl = document.forms['Book'].selectBook;
-    var isbn = selectEl.value;
-    if (isbn) {
-      Book.destroy( isbn);
-      // remove deleted book from select options
+  //Event handler for deleting a movie.
+  handleDeleteButtonClickEvent: function () 
+  {
+    var selectEl = document.forms['Movie'].selectMovie;
+    var movieId = selectEl.value;
+    if (movieId) {
+      Movie.destroy( movieId);
+      //Removes deleted movie from select options.
       selectEl.remove( selectEl.selectedIndex);
     }
   }

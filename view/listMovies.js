@@ -1,6 +1,8 @@
+
 /**
- * @fileOverview  Contains various view functions for the use case listBooks
- * @author Gerd Wagner
+ * Version 0.6
+ * Author: htha9587
+ * 12-26-16
  */
  pl.view.listBooks = {
   setupUserInterface: function () {
